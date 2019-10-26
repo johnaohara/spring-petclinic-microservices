@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.api.application;
+package io.quarkus.samples.petclinic.api.application;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,16 +21,16 @@ import java.util.Map;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
-import org.springframework.samples.petclinic.api.dto.VisitDetails;
-import org.springframework.samples.petclinic.api.dto.Visits;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+import io.quarkus.samples.petclinic.api.dto.VisitDetails;
+import io.quarkus.samples.petclinic.api.dto.Visits;
+import io.quarkus.stereotype.Component;
+import io.quarkus.web.client.RestTemplate;
+import io.quarkus.web.util.UriComponentsBuilder;
 
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.joining;
-import static org.springframework.web.util.UriComponentsBuilder.fromHttpUrl;
+import static io.quarkus.web.util.UriComponentsBuilder.fromHttpUrl;
 
 /**
  * @author Maciej Szarlinski

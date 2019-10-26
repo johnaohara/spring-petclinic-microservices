@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.api.boundary.web;
+package io.quarkus.samples.petclinic.api.boundary.web;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.samples.petclinic.api.application.CustomersServiceClient;
-import org.springframework.samples.petclinic.api.dto.OwnerDetails;
-import org.springframework.samples.petclinic.api.application.VisitsServiceClient;
-import org.springframework.samples.petclinic.api.dto.VisitDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.quarkus.samples.petclinic.api.application.CustomersServiceClient;
+import io.quarkus.samples.petclinic.api.dto.OwnerDetails;
+import io.quarkus.samples.petclinic.api.application.VisitsServiceClient;
+import io.quarkus.samples.petclinic.api.dto.VisitDetails;
+import io.quarkus.web.bind.annotation.GetMapping;
+import io.quarkus.web.bind.annotation.PathVariable;
+import io.quarkus.web.bind.annotation.RequestMapping;
+import io.quarkus.web.bind.annotation.RestController;
 
 
 import static java.util.Collections.emptyList;

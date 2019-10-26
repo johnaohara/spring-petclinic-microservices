@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.quarkus.samples.petclinic.admin</groupId>
+    <artifactId>quarkus-petclinic-admin-server</artifactId>
+    <packaging>jar</packaging>
+    <description>Quarkus Boot Admin server</description>
+
+    <parent>
+        <groupId>io.quarkus.samples</groupId>
+        <artifactId>quarkus-petclinic-microservices</artifactId>
+        <version>2.1.4</version>
+    </parent>
+
+    <properties>
+        <quarkus-boot-admin.version>2.1.2</quarkus-boot-admin.version>
+        <docker.image.exposed.port>9090</docker.image.exposed.port>
+        <docker.image.dockerfile.dir>${basedir}/../docker</docker.image.dockerfile.dir>
+    </properties>
+
+    <dependencies>
+        <!-- Quarkus Boot -->
+        <dependency>
+            <groupId>io.quarkus.boot</groupId>
+            <artifactId>quarkus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- Quarkus Boot Admin -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>quarkus-boot-admin-starter-server</artifactId>
+            <version>${quarkus-boot-admin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>quarkus-boot-admin-server-ui</artifactId>
+            <version>${quarkus-boot-admin.version}</version>
+        </dependency>
+
+        <!-- Third-party librairies -->
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>buildDocker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>${docker.plugin.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

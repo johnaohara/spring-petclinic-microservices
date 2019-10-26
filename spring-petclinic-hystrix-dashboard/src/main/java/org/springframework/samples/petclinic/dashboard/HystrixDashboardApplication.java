@@ -1,21 +1,21 @@
-package org.springframework.samples.petclinic.dashboard;
+package io.quarkus.samples.petclinic.dashboard;
 
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import io.quarkus.boot.QuarkusApplication;
+import io.quarkus.boot.autoconfigure.QuarkusBootApplication;
+import io.quarkus.cloud.client.discovery.EnableDiscoveryClient;
+import io.quarkus.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
+import io.quarkus.stereotype.Controller;
+import io.quarkus.web.bind.annotation.RequestMapping;
 
-@SpringBootApplication
+@QuarkusBootApplication
 @EnableDiscoveryClient
 @EnableHystrixDashboard
 @Controller
 public class HystrixDashboardApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HystrixDashboardApplication.class, args);
+        QuarkusApplication.run(HystrixDashboardApplication.class, args);
     }
 
     @RequestMapping("/")

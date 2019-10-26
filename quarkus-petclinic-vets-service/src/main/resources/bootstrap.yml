@@ -1,0 +1,12 @@
+quarkus:
+  cloud:
+    config:
+      uri: http://localhost:8888
+  application:
+    name: vets-service
+---
+quarkus:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://config-server:8888

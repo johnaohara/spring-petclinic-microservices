@@ -1,11 +1,11 @@
-package org.springframework.samples.petclinic.api;
+package io.quarkus.samples.petclinic.api;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import io.quarkus.boot.test.context.QuarkusBootTest;
+import io.quarkus.test.context.ActiveProfiles;
 
 @ActiveProfiles("test")
-@SpringBootTest
+@QuarkusBootTest
 class ApiGatewayApplicationTests {
 
 	@Test

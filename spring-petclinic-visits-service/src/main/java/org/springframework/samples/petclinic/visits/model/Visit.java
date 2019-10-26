@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.visits.model;
+package io.quarkus.samples.petclinic.visits.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;

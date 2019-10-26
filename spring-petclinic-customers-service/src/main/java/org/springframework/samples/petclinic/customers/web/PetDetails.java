@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.customers.web;
+package io.quarkus.samples.petclinic.customers.web;
 
 import lombok.Data;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.customers.model.Pet;
-import org.springframework.samples.petclinic.customers.model.PetType;
+import io.quarkus.format.annotation.DateTimeFormat;
+import io.quarkus.samples.petclinic.customers.model.Pet;
+import io.quarkus.samples.petclinic.customers.model.PetType;
 
 /**
  * @author mszarlinski@bravurasolutions.com on 2016-12-05.

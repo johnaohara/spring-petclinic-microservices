@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.config;
+package io.quarkus.samples.petclinic.config;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.config.server.EnableConfigServer;
+import io.quarkus.boot.QuarkusApplication;
+import io.quarkus.boot.autoconfigure.QuarkusBootApplication;
+import io.quarkus.cloud.config.server.EnableConfigServer;
 
 /**
  * @author Maciej Szarlinski
  */
 @EnableConfigServer
-@SpringBootApplication
+@QuarkusBootApplication
 public class ConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConfigServerApplication.class, args);
+		QuarkusApplication.run(ConfigServerApplication.class, args);
 	}
 }

@@ -3,14 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.springframework.samples.petclinic.client</groupId>
-	<artifactId>spring-petclinic-customers-service</artifactId>
+	<groupId>io.quarkus.samples.petclinic.client</groupId>
+	<artifactId>quarkus-petclinic-customers-service</artifactId>
 	<packaging>jar</packaging>
-	<description>Spring PetClinic Customers Service</description>
+	<description>Quarkus PetClinic Customers Service</description>
 
 	<parent>
-		<groupId>org.springframework.samples</groupId>
-		<artifactId>spring-petclinic-microservices</artifactId>
+		<groupId>io.quarkus.samples</groupId>
+		<artifactId>quarkus-petclinic-microservices</artifactId>
 		<version>2.1.4</version>
 	</parent>
 
@@ -21,41 +21,41 @@
 
 	<dependencies>
 
-        <!-- Spring Boot -->
+        <!-- Quarkus Boot -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>io.quarkus.boot</groupId>
+            <artifactId>quarkus-boot-starter-actuator</artifactId>
         </dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>io.quarkus.boot</groupId>
+			<artifactId>quarkus-boot-starter-data-jpa</artifactId>
 		</dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>io.quarkus.boot</groupId>
+            <artifactId>quarkus-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>io.quarkus.boot</groupId>
+            <artifactId>quarkus-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring Cloud -->
+        <!-- Quarkus Cloud -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-sleuth</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-sleuth-zipkin</artifactId>
         </dependency>
 
         <!-- Third parties -->

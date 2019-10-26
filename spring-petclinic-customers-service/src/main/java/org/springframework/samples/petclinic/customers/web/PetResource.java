@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.customers.web;
+package io.quarkus.samples.petclinic.customers.web;
 
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.samples.petclinic.customers.model.*;
-import org.springframework.web.bind.annotation.*;
+import io.quarkus.http.HttpStatus;
+import io.quarkus.samples.petclinic.customers.model.*;
+import io.quarkus.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;

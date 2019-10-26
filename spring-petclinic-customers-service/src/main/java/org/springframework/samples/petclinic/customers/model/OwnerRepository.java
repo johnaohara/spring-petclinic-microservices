@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.customers.model;
+package io.quarkus.samples.petclinic.customers.model;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import io.quarkus.data.jpa.repository.JpaRepository;
 
 /**
- * Repository class for <code>Owner</code> domain objects All method names are compliant with Spring Data naming
- * conventions so this interface can easily be extended for Spring Data See here: http://static.springsource.org/spring-data/jpa/docs/current/reference/html/jpa.repositories.html#jpa.query-methods.query-creation
+ * Repository class for <code>Owner</code> domain objects All method names are compliant with Quarkus Data naming
+ * conventions so this interface can easily be extended for Quarkus Data See here: http://static.quarkussource.org/quarkus-data/jpa/docs/current/reference/html/jpa.repositories.html#jpa.query-methods.query-creation
  *
  * @author Ken Krebs
  * @author Juergen Hoeller

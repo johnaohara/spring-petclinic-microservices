@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>spring-petclinic-microservices</artifactId>
-        <groupId>org.springframework.samples</groupId>
+        <artifactId>quarkus-petclinic-microservices</artifactId>
+        <groupId>io.quarkus.samples</groupId>
         <version>2.1.4</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-petclinic-hystrix-dashboard</artifactId>
-    <description>Circuit breaker dashboard with with Spring Cloud Netflix Hystrix</description>
+    <artifactId>quarkus-petclinic-hystrix-dashboard</artifactId>
+    <description>Circuit breaker dashboard with with Quarkus Cloud Netflix Hystrix</description>
 
     <properties>
         <docker.image.exposed.port>7979</docker.image.exposed.port>
@@ -19,21 +19,21 @@
 
     <dependencies>
 
-        <!-- Spring Boot -->
+        <!-- Quarkus Boot -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>io.quarkus.boot</groupId>
+            <artifactId>quarkus-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Cloud -->
+        <!-- Quarkus Cloud -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-netflix-hystrix-dashboard</artifactId>
         </dependency>
 
         <!-- Testing -->

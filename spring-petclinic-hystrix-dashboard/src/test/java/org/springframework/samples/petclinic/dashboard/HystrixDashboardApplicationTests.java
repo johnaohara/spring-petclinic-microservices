@@ -1,9 +1,9 @@
-package org.springframework.samples.petclinic.dashboard;
+package io.quarkus.samples.petclinic.dashboard;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import io.quarkus.boot.test.context.QuarkusBootTest;
 
-@SpringBootTest
+@QuarkusBootTest
 class HystrixDashboardApplicationTests {
 
     @Test

@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.discovery;
+package io.quarkus.samples.petclinic.discovery;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import io.quarkus.boot.QuarkusApplication;
+import io.quarkus.boot.autoconfigure.QuarkusBootApplication;
+import io.quarkus.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * @author Maciej Szarlinski
  */
 @EnableEurekaServer
-@SpringBootApplication
+@QuarkusBootApplication
 public class DiscoveryServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DiscoveryServerApplication.class, args);
+		QuarkusApplication.run(DiscoveryServerApplication.class, args);
 	}
 }

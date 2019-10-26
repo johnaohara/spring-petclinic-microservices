@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.customers;
+package io.quarkus.samples.petclinic.customers;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import io.quarkus.boot.QuarkusApplication;
+import io.quarkus.boot.autoconfigure.QuarkusBootApplication;
+import io.quarkus.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author Maciej Szarlinski
  */
 @EnableDiscoveryClient
-@SpringBootApplication
+@QuarkusBootApplication
 public class CustomersServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CustomersServiceApplication.class, args);
+		QuarkusApplication.run(CustomersServiceApplication.class, args);
 	}
 }

@@ -1,11 +1,11 @@
-spring:
+quarkus:
   cloud:
     config:
       uri: http://localhost:8888
   application:
     name: api-gateway
 ---
-spring:
+quarkus:
   profiles: docker
   cloud:
     config:

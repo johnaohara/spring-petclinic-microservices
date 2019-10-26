@@ -3,58 +3,75 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.4.RELEASE</version>
-    </parent>
-
-    <groupId>org.springframework.samples</groupId>
-    <artifactId>spring-petclinic-microservices</artifactId>
+    <groupId>io.quarkus.samples</groupId>
+    <artifactId>quarkus-petclinic-microservices</artifactId>
     <version>2.1.4</version>
     <name>${project.artifactId}</name>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>spring-petclinic-admin-server</module>
-        <module>spring-petclinic-customers-service</module>
-        <module>spring-petclinic-vets-service</module>
-        <module>spring-petclinic-visits-service</module>
-        <module>spring-petclinic-config-server</module>
-        <module>spring-petclinic-discovery-server</module>
-        <module>spring-petclinic-api-gateway</module>
-        <module>spring-petclinic-hystrix-dashboard</module>
-    </modules>
 
     <properties>
+        <!--<quarkus.version>0.26.1</quarkus.version>-->
+        <quarkus.version>999-SNAPSHOT</quarkus.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+
         <java.version>1.8</java.version>
         <assertj.version>3.11.1</assertj.version>
 
-        <spring-boot.version>2.1.2.RELEASE</spring-boot.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <quarkus-boot.version>2.1.2.RELEASE</quarkus-boot.version>
+        <quarkus-cloud.version>Greenwich.SR1</quarkus-cloud.version>
 
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
 
-        <docker.image.prefix>springcommunity</docker.image.prefix>
+        <docker.image.prefix>quarkuscommunity</docker.image.prefix>
         <docker.image.exposed.port>9090</docker.image.exposed.port>
         <docker.image.dockerfile.dir>${basedir}</docker.image.dockerfile.dir>
         <docker.image.dockerize.version>v0.6.1</docker.image.dockerize.version>
         <docker.plugin.version>1.2.0</docker.plugin.version>
     </properties>
 
+
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <modules>
+        <!--<module>quarkus-petclinic-admin-server</module>-->
+        <!--<module>quarkus-petclinic-customers-service</module>-->
+        <module>quarkus-petclinic-vets-service</module>
+        <!--<module>quarkus-petclinic-visits-service</module>-->
+        <!--<module>quarkus-petclinic-config-server</module>-->
+        <!--<module>quarkus-petclinic-discovery-server</module>-->
+        <!--<module>quarkus-petclinic-api-gateway</module>-->
+        <!--<module>quarkus-petclinic-hystrix-dashboard</module>-->
+    </modules>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.quarkus.cloud</groupId>
+                <artifactId>quarkus-cloud-dependencies</artifactId>
+                <version>${quarkus-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring-boot.version}</version>
+                <groupId>io.quarkus.boot</groupId>
+                <artifactId>quarkus-boot-starter-test</artifactId>
+                <version>${quarkus-boot.version}</version>
                 <scope>test</scope>
                 <exclusions>
                     <exclusion>
@@ -75,24 +92,24 @@
 
     <profiles>
         <profile>
-            <id>springboot</id>
+            <id>quarkusboot</id>
             <activation>
                 <file>
-                    <!-- Just a way to identify a Spring Boot application -->
+                    <!-- Just a way to identify a Quarkus Boot application -->
                     <exists>src/main/resources/bootstrap.yml</exists>
                 </file>
             </activation>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <groupId>io.quarkus.boot</groupId>
+                        <artifactId>quarkus-boot-maven-plugin</artifactId>
                         <configuration>
                             <fork>true</fork>
                         </configuration>
                         <executions>
                             <execution>
-                                <!-- Spring Boot Actuator displays build-related information if a META-INF/build-info.properties file is present -->
+                                <!-- Quarkus Boot Actuator displays build-related information if a META-INF/build-info.properties file is present -->
                                 <goals>
                                     <goal>build-info</goal>
                                 </goals>
@@ -108,7 +125,7 @@
                         </executions>
                     </plugin>
 
-                    <!-- Spring Boot Actuator displays build-related information if a META-INF/build-info.properties file is present -->
+                    <!-- Quarkus Boot Actuator displays build-related information if a META-INF/build-info.properties file is present -->
                     <plugin>
                         <groupId>pl.project13.maven</groupId>
                         <artifactId>git-commit-id-plugin</artifactId>
@@ -177,9 +194,9 @@
 
     <repositories>
         <repository>
-            <id>repository.spring.milestone</id>
-            <name>Spring Milestone Repository</name>
-            <url>http://repo.spring.io/milestone</url>
+            <id>repository.quarkus.milestone</id>
+            <name>Quarkus Milestone Repository</name>
+            <url>http://repo.quarkus.io/milestone</url>
         </repository>
     </repositories>
 

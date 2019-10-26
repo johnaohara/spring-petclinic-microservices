@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.api.application;
+package io.quarkus.samples.petclinic.api.application;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.samples.petclinic.api.dto.OwnerDetails;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import io.quarkus.samples.petclinic.api.dto.OwnerDetails;
+import io.quarkus.stereotype.Component;
+import io.quarkus.web.client.RestTemplate;
 
 /**
  * @author Maciej Szarlinski

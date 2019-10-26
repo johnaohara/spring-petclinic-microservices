@@ -1,24 +1,24 @@
-package org.springframework.samples.petclinic.visits.web;
+package io.quarkus.samples.petclinic.visits.web;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.samples.petclinic.visits.model.VisitRepository;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
+import io.quarkus.beans.factory.annotation.Autowired;
+import io.quarkus.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import io.quarkus.boot.test.mock.mockito.MockBean;
+import io.quarkus.samples.petclinic.visits.model.VisitRepository;
+import io.quarkus.test.context.ActiveProfiles;
+import io.quarkus.test.context.junit.jupiter.QuarkusExtension;
+import io.quarkus.test.web.servlet.MockMvc;
 
 
 import static java.util.Arrays.asList;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.samples.petclinic.visits.model.Visit.visit;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static io.quarkus.samples.petclinic.visits.model.Visit.visit;
+import static io.quarkus.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static io.quarkus.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static io.quarkus.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(QuarkusExtension.class)
 @WebMvcTest(VisitResource.class)
 @ActiveProfiles("test")
 class VisitResourceTest {

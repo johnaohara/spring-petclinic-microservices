@@ -3,14 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.springframework.samples.petclinic.config</groupId>
-	<artifactId>spring-petclinic-config-server</artifactId>
+	<groupId>io.quarkus.samples.petclinic.config</groupId>
+	<artifactId>quarkus-petclinic-config-server</artifactId>
 	<packaging>jar</packaging>
-	<description>Spring PetClinic Config Server</description>
+	<description>Quarkus PetClinic Config Server</description>
 
     <parent>
-        <groupId>org.springframework.samples</groupId>
-        <artifactId>spring-petclinic-microservices</artifactId>
+        <groupId>io.quarkus.samples</groupId>
+        <artifactId>quarkus-petclinic-microservices</artifactId>
         <version>2.1.4</version>
     </parent>
 
@@ -20,17 +20,17 @@
     </properties>
 
 	<dependencies>
-        <!-- Spring Boot -->
+        <!-- Quarkus Boot -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>io.quarkus.boot</groupId>
+            <artifactId>quarkus-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Cloud -->
+        <!-- Quarkus Cloud -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<groupId>io.quarkus.cloud</groupId>
+			<artifactId>quarkus-cloud-config-server</artifactId>
 		</dependency>
 
         <!-- Third-party librairies -->

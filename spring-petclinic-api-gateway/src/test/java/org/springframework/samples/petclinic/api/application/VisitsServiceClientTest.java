@@ -1,15 +1,15 @@
-package org.springframework.samples.petclinic.api.application;
+package io.quarkus.samples.petclinic.api.application;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.http.MediaType;
-import org.springframework.samples.petclinic.api.dto.VisitDetails;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
+import io.quarkus.beans.factory.annotation.Autowired;
+import io.quarkus.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import io.quarkus.context.annotation.EnableAspectJAutoProxy;
+import io.quarkus.http.MediaType;
+import io.quarkus.samples.petclinic.api.dto.VisitDetails;
+import io.quarkus.test.context.junit.jupiter.QuarkusJUnitConfig;
+import io.quarkus.test.web.client.MockRestServiceServer;
+import io.quarkus.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,13 +17,13 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
+import static io.quarkus.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static io.quarkus.test.web.client.response.MockRestResponseCreators.withServerError;
+import static io.quarkus.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @EnableCircuitBreaker
 @EnableAspectJAutoProxy
-@SpringJUnitConfig(classes = {VisitsServiceClient.class, RestTemplate.class})
+@QuarkusJUnitConfig(classes = {VisitsServiceClient.class, RestTemplate.class})
 class VisitsServiceClientTest {
 
     private static final Integer PET_ID = 1;

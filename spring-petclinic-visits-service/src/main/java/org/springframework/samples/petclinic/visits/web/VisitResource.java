@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.visits.web;
+package io.quarkus.samples.petclinic.visits.web;
 
 import java.util.List;
 import javax.validation.Valid;
@@ -22,16 +22,16 @@ import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.samples.petclinic.visits.model.Visit;
-import org.springframework.samples.petclinic.visits.model.VisitRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import io.quarkus.http.HttpStatus;
+import io.quarkus.samples.petclinic.visits.model.Visit;
+import io.quarkus.samples.petclinic.visits.model.VisitRepository;
+import io.quarkus.web.bind.annotation.GetMapping;
+import io.quarkus.web.bind.annotation.PathVariable;
+import io.quarkus.web.bind.annotation.PostMapping;
+import io.quarkus.web.bind.annotation.RequestBody;
+import io.quarkus.web.bind.annotation.RequestParam;
+import io.quarkus.web.bind.annotation.ResponseStatus;
+import io.quarkus.web.bind.annotation.RestController;
 
 /**
  * @author Juergen Hoeller

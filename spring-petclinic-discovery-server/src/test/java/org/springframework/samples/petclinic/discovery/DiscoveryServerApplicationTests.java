@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.discovery;
+package io.quarkus.samples.petclinic.discovery;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import io.quarkus.boot.test.context.QuarkusBootTest;
 
-@SpringBootTest
+@QuarkusBootTest
 class DiscoveryServerApplicationTests {
 
 	@Test

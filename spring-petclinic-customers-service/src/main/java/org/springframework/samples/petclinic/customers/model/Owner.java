@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.customers.model;
+package io.quarkus.samples.petclinic.customers.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,9 +33,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.core.style.ToStringCreator;
+import io.quarkus.beans.support.MutableSortDefinition;
+import io.quarkus.beans.support.PropertyComparator;
+import io.quarkus.core.style.ToStringCreator;
 
 /**
  * Simple JavaBean domain object representing an owner.

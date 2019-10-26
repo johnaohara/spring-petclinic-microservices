@@ -1,4 +1,4 @@
-spring:
+quarkus:
   cloud:
     gateway:
       routes:

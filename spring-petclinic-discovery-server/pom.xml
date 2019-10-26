@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.springframework.samples.petclinic.discovery</groupId>
-    <artifactId>spring-petclinic-discovery-server</artifactId>
+    <groupId>io.quarkus.samples.petclinic.discovery</groupId>
+    <artifactId>quarkus-petclinic-discovery-server</artifactId>
     <packaging>jar</packaging>
-    <description>Spring PetClinic Discovery Server</description>
+    <description>Quarkus PetClinic Discovery Server</description>
 
     <parent>
-        <groupId>org.springframework.samples</groupId>
-        <artifactId>spring-petclinic-microservices</artifactId>
+        <groupId>io.quarkus.samples</groupId>
+        <artifactId>quarkus-petclinic-microservices</artifactId>
         <version>2.1.4</version>
     </parent>
 
@@ -20,21 +20,21 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot -->
+        <!-- Quarkus Boot -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>io.quarkus.boot</groupId>
+            <artifactId>quarkus-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Cloud -->
+        <!-- Quarkus Cloud -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <groupId>io.quarkus.cloud</groupId>
+            <artifactId>quarkus-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
 
         <!-- Testing -->

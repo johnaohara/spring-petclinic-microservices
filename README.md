@@ -1,12 +1,12 @@
-# Distributed version of the Spring PetClinic Sample Application built with Spring Cloud 
+# Distributed version of the Quarkus PetClinic Sample Application built with Quarkus Cloud 
 
-[![Build Status](https://travis-ci.org/spring-petclinic/spring-petclinic-microservices.svg?branch=master)](https://travis-ci.org/spring-petclinic/spring-petclinic-microservices/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/quarkus-petclinic/quarkus-petclinic-microservices.svg?branch=master)](https://travis-ci.org/quarkus-petclinic/quarkus-petclinic-microservices/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This microservices branch was initially derived from [AngularJS version](https://github.com/spring-petclinic/spring-petclinic-angular1) to demonstrate how to split sample Spring application into [microservices](http://www.martinfowler.com/articles/microservices.html). To achieve that goal we used [Spring Cloud Netflix](https://github.com/spring-cloud/spring-cloud-netflix) technology stack.
+This microservices branch was initially derived from [AngularJS version](https://github.com/quarkus-petclinic/quarkus-petclinic-angular1) to demonstrate how to split sample Quarkus application into [microservices](http://www.martinfowler.com/articles/microservices.html). To achieve that goal we used [Quarkus Cloud Netflix](https://github.com/quarkus-cloud/quarkus-cloud-netflix) technology stack.
 
 ## Starting services locally without Docker
 
-Every microservice is a Spring Boot application and can be started locally using IDE or `../mvnw spring-boot:run` command. Please note that supporting services (Config and Discovery Server) must be started before any other application (Customers, Vets, Visits and API).
+Every microservice is a Quarkus Boot application and can be started locally using IDE or `../mvnw quarkus-boot:run` command. Please note that supporting services (Config and Discovery Server) must be started before any other application (Customers, Vets, Visits and API).
 Startup of Tracing server, Admin server, Grafana and Prometheus is optional.
 If everything goes well, you can access the following services at given location:
 * Discovery Server - http://localhost:8761
@@ -14,7 +14,7 @@ If everything goes well, you can access the following services at given location
 * AngularJS frontend (API Gateway) - http://localhost:8080
 * Customers, Vets and Visits Services - random port, check Eureka Dashboard 
 * Tracing Server (Zipkin) - http://localhost:9411/zipkin/ (we use [openzipkin](https://github.com/openzipkin/zipkin/tree/master/zipkin-server))
-* Admin Server (Spring Boot Admin) - http://localhost:9090
+* Admin Server (Quarkus Boot Admin) - http://localhost:9090
 * Grafana Dashboards - http://localhost:3000
 * Prometheus - http://localhost:9091
 * Hystrix Dashboard for Circuit Breaker pattern - http://localhost:7979 - On the home page is a form where you can enter 
@@ -22,16 +22,16 @@ the URL for an event stream to monitor, for example the `api-gateway` service ru
 or running into docker: `http://api-gateway:8080/actuator/hystrix.stream`
 
 
-You can tell Config Server to use your local Git repository by using `local` Spring profile and setting
+You can tell Config Server to use your local Git repository by using `local` Quarkus profile and setting
 `GIT_REPO` environment variable, for example:
-`-Dspring.profiles.active=local -DGIT_REPO=/projects/spring-petclinic-microservices-config`
+`-Dquarkus.profiles.active=local -DGIT_REPO=/projects/quarkus-petclinic-microservices-config`
 
 ## Starting services locally with docker-compose
 In order to start entire infrastructure using Docker, you have to build images by executing `./mvnw clean install -PbuildDocker` 
 from a project root. Once images are ready, you can start them with a single command
 `docker-compose up`. Containers startup order is coordinated with [`dockerize` script](https://github.com/jwilder/dockerize). 
 After starting services it takes a while for API Gateway to be in sync with service registry,
-so don't be scared of initial Spring Cloud Gateway timeouts. You can track services availability using Eureka dashboard
+so don't be scared of initial Quarkus Cloud Gateway timeouts. You can track services availability using Eureka dashboard
 available by default at http://localhost:8761.
 
 The `master` branch uses an  Alpine linux  with JRE 8 as Docker base. You will find a Java 11 version in the `release/java11` branch.
@@ -39,25 +39,25 @@ The `master` branch uses an  Alpine linux  with JRE 8 as Docker base. You will f
 *NOTE: Under MacOSX or Windows, make sure that the Docker VM has enough memory to run the microservices. The default settings
 are usually not enough and make the `docker-compose up` painfully slow.*
 
-## Understanding the Spring Petclinic application
+## Understanding the Quarkus Petclinic application
 
-[See the presentation of the Spring Petclinic Framework version](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
+[See the presentation of the Quarkus Petclinic Framework version](http://fr.slideshare.net/AntoineRey/quarkus-framework-petclinic-sample-application)
 
-[A blog bost introducing the Spring Petclinic Microsevices](http://javaetmoi.com/2018/10/architecture-microservices-avec-spring-cloud/) (french language)
+[A blog bost introducing the Quarkus Petclinic Microsevices](http://javaetmoi.com/2018/10/architecture-microservices-avec-quarkus-cloud/) (french language)
 
 You can then access petclinic here: http://localhost:8080/
 
-![Spring Petclinic Microservices screenshot](docs/application-screenshot.png)
+![Quarkus Petclinic Microservices screenshot](docs/application-screenshot.png)
 
 
-**Architecture diagram of the Spring Petclinic Microservices**
+**Architecture diagram of the Quarkus Petclinic Microservices**
 
-![Spring Petclinic Microservices architecture](docs/microservices-architecture-diagram.jpg)
+![Quarkus Petclinic Microservices architecture](docs/microservices-architecture-diagram.jpg)
 
 
-## In case you find a bug/suggested improvement for Spring Petclinic Microservices
+## In case you find a bug/suggested improvement for Quarkus Petclinic Microservices
 
-Our issue tracker is available here: https://github.com/spring-petclinic/spring-petclinic-microservices/issues
+Our issue tracker is available here: https://github.com/quarkus-petclinic/quarkus-petclinic-microservices/issues
 
 ## Database configuration
 
@@ -74,10 +74,10 @@ docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:
 ```
 or download and install the MySQL database (e.g., MySQL Community Server 5.7 GA), which can be found here: https://dev.mysql.com/downloads/
 
-### Use the Spring 'mysql' profile
+### Use the Quarkus 'mysql' profile
 
 To use a MySQL database, you have to start 3 microservices (`visits-service`, `customers-service` and `vets-services`)
-with the `mysql` Spring profile. Add the `--spring.profiles.active=mysql` as programm argument.
+with the `mysql` Quarkus profile. Add the `--quarkus.profiles.active=mysql` as programm argument.
 
 By default, at startup, database schema will be created and data will be populated.
 You may also manualy create the PetClinic database and data by executing the `"db/mysql/{schema,data}.sql"` scripts of each 3 microservices. 
@@ -95,7 +95,7 @@ the host and port of your MySQL JDBC connection string.
 Grafana and Prometheus are included in the `docker-compose.yml` configuration, and the public facing applications
 have been instrumented with [MicroMeter](https://micrometer.io) to collect JVM and custom business metrics.
 
-A JMeter load testing script is available to stress the application and generate metrics: [petclinic_test_plan.jmx](spring-petclinic-api-gateway/src/test/jmeter/petclinic_test_plan.jmx)
+A JMeter load testing script is available to stress the application and generate metrics: [petclinic_test_plan.jmx](quarkus-petclinic-api-gateway/src/test/jmeter/petclinic_test_plan.jmx)
 
 ![Grafana metrics dashboard](docs/grafana-custom-metrics-dashboard.png)
 
@@ -106,15 +106,15 @@ A JMeter load testing script is available to stress the application and generate
 ### Using Grafana with Prometheus
 
 * An anonymous access and a Prometheus datasource are setup.
-* A `Spring Petclinic Metrics` Dashboard is available at the URL [http://localhost:3000/d/69JXeR0iw/spring-petclinic-metrics]().
+* A `Quarkus Petclinic Metrics` Dashboard is available at the URL [http://localhost:3000/d/69JXeR0iw/quarkus-petclinic-metrics]().
 You will find the JSON configuration file here: [docker/grafana/dashboards/grafana-petclinic-dashboard.json]().
-* You may create your own dashboard or import the [Micrometer/SpringBoot dashboard](https://grafana.com/dashboards/4701) via the Import Dashboard menu item.
+* You may create your own dashboard or import the [Micrometer/QuarkusBoot dashboard](https://grafana.com/dashboards/4701) via the Import Dashboard menu item.
 The id for this dashboard is `4701`.
 
 ### Custom metrics
 
-Spring Boot registers a lot number of core metrics: JVM, CPU, Tomcat, Logback... 
-The Spring Boot auto-configuration enables the instrumentation of requests handled by Spring MVC.
+Quarkus Boot registers a lot number of core metrics: JVM, CPU, Tomcat, Logback... 
+The Quarkus Boot auto-configuration enables the instrumentation of requests handled by Quarkus MVC.
 All those three REST controllers `OwnerResource`, `PetResource` and `VisitResource` have been instrumented by the `@Timed` Micrometer annotation at class level.
 
 * `customers-service` application has the following custom metrics enabled:
@@ -125,40 +125,40 @@ All those three REST controllers `OwnerResource`, `PetResource` and `VisitResour
 
 ## Looking for something in particular?
 
-| Spring Cloud components         | Resources  |
+| Quarkus Cloud components         | Resources  |
 |---------------------------------|------------|
-| Configuration server            | [Config server properties](spring-petclinic-config-server/src/main/resources/application.yml) and [Configuration repository] |
-| Service Discovery               | [Eureka server](spring-petclinic-discovery-server) and [Service discovery client](spring-petclinic-vets-service/src/main/java/org/springframework/samples/petclinic/vets/VetsServiceApplication.java) |
-| API Gateway                     | [Spring Cloud Gateway starter](spring-petclinic-api-gateway/pom.xml) and [Routing configuration](/spring-petclinic-api-gateway/src/main/resources/application.yml) |
-| Docker Compose                  | [Spring Boot with Docker guide](https://spring.io/guides/gs/spring-boot-docker/) and [docker-compose file](docker-compose.yml) |
-| Circuit Breaker                 | [Hystrix fallback method](spring-petclinic-api-gateway/src/main/java/org/springframework/samples/petclinic/api/application/VisitsServiceClient.java)  |
-| Grafana / Prometheus Monitoring | [Micrometer implementation](https://micrometer.io/), [Spring Boot Actuator Production Ready Metrics] |
+| Configuration server            | [Config server properties](quarkus-petclinic-config-server/src/main/resources/application.yml) and [Configuration repository] |
+| Service Discovery               | [Eureka server](quarkus-petclinic-discovery-server) and [Service discovery client](quarkus-petclinic-vets-service/src/main/java/org/quarkusframework/samples/petclinic/vets/VetsServiceApplication.java) |
+| API Gateway                     | [Quarkus Cloud Gateway starter](quarkus-petclinic-api-gateway/pom.xml) and [Routing configuration](/quarkus-petclinic-api-gateway/src/main/resources/application.yml) |
+| Docker Compose                  | [Quarkus Boot with Docker guide](https://quarkus.io/guides/gs/quarkus-boot-docker/) and [docker-compose file](docker-compose.yml) |
+| Circuit Breaker                 | [Hystrix fallback method](quarkus-petclinic-api-gateway/src/main/java/org/quarkusframework/samples/petclinic/api/application/VisitsServiceClient.java)  |
+| Grafana / Prometheus Monitoring | [Micrometer implementation](https://micrometer.io/), [Quarkus Boot Actuator Production Ready Metrics] |
 
  Front-end module  | Files |
 |-------------------|-------|
-| Node and NPM      | [The frontend-maven-plugin plugin downloads/installs Node and NPM locally then runs Bower and Gulp](spring-petclinic-ui/pom.xml)  |
-| Bower             | [JavaScript libraries are defined by the manifest file bower.json](spring-petclinic-ui/bower.json)  |
-| Gulp              | [Tasks automated by Gulp: minify CSS and JS, generate CSS from LESS, copy other static resources](spring-petclinic-ui/gulpfile.js)  |
-| Angular JS        | [app.js, controllers and templates](spring-petclinic-ui/src/scripts/)  |
+| Node and NPM      | [The frontend-maven-plugin plugin downloads/installs Node and NPM locally then runs Bower and Gulp](quarkus-petclinic-ui/pom.xml)  |
+| Bower             | [JavaScript libraries are defined by the manifest file bower.json](quarkus-petclinic-ui/bower.json)  |
+| Gulp              | [Tasks automated by Gulp: minify CSS and JS, generate CSS from LESS, copy other static resources](quarkus-petclinic-ui/gulpfile.js)  |
+| Angular JS        | [app.js, controllers and templates](quarkus-petclinic-ui/src/scripts/)  |
 
 
-## Interesting Spring Petclinic forks
+## Interesting Quarkus Petclinic forks
 
-The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
-GitHub org is the "canonical" implementation, currently based on Spring Boot and Thymeleaf.
+The Quarkus Petclinic master branch in the main [quarkus-projects](https://github.com/quarkus-projects/quarkus-petclinic)
+GitHub org is the "canonical" implementation, currently based on Quarkus Boot and Thymeleaf.
 
-This [spring-petclinic-microservices](https://github.com/spring-petclinic/spring-petclinic-microservices/) project is one of the [several forks](https://spring-petclinic.github.io/docs/forks.html) 
-hosted in a special GitHub org: [spring-petclinic](https://github.com/spring-petclinic).
+This [quarkus-petclinic-microservices](https://github.com/quarkus-petclinic/quarkus-petclinic-microservices/) project is one of the [several forks](https://quarkus-petclinic.github.io/docs/forks.html) 
+hosted in a special GitHub org: [quarkus-petclinic](https://github.com/quarkus-petclinic).
 If you have a special interest in a different technology stack
 that could be used to implement the Pet Clinic then please join the community there.
 
 
 # Contributing
 
-The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-microservices/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
+The [issue tracker](https://github.com/quarkus-petclinic/quarkus-petclinic-microservices/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
 
 For pull requests, editor preferences are available in the [editor config](.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
 
-[Configuration repository]: https://github.com/spring-petclinic/spring-petclinic-microservices-config
-[Spring Boot Actuator Production Ready Metrics]: https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-metrics.html
+[Configuration repository]: https://github.com/quarkus-petclinic/quarkus-petclinic-microservices-config
+[Quarkus Boot Actuator Production Ready Metrics]: https://docs.quarkus.io/quarkus-boot/docs/current/reference/html/production-ready-metrics.html
