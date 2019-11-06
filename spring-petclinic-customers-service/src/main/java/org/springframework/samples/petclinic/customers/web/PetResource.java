@@ -15,13 +15,22 @@
  */
 package org.springframework.samples.petclinic.customers.web;
 
-import io.micrometer.core.annotation.Timed;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.jboss.logging.Logger;
 import org.springframework.http.HttpStatus;
-import org.springframework.samples.petclinic.customers.model.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.samples.petclinic.customers.model.Owner;
+import org.springframework.samples.petclinic.customers.model.OwnerRepository;
+import org.springframework.samples.petclinic.customers.model.Pet;
+import org.springframework.samples.petclinic.customers.model.PetRepository;
+import org.springframework.samples.petclinic.customers.model.PetType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,13 +41,16 @@ import java.util.Optional;
  * @author Maciej Szarlinski
  */
 @RestController
-@Timed("petclinic.pet")
-@RequiredArgsConstructor
-@Slf4j
-class PetResource {
+//@Timed("petclinic.pet")
+public class PetResource {
 
-    private final PetRepository petRepository;
-    private final OwnerRepository ownerRepository;
+    private final Logger log = Logger.getLogger(PetResource.class);
+
+    @Inject
+    PetRepository petRepository;
+
+    @Inject
+    OwnerRepository ownerRepository;
 
 
     @GetMapping("/petTypes")
@@ -63,20 +75,20 @@ class PetResource {
     @PutMapping("/owners/*/pets/{petId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void processUpdateForm(@RequestBody PetRequest petRequest) {
-        int petId = petRequest.getId();
+        int petId = petRequest.id;
         Pet pet = findPetById(petId);
         save(pet, petRequest);
     }
 
     private Pet save(final Pet pet, final PetRequest petRequest) {
 
-        pet.setName(petRequest.getName());
-        pet.setBirthDate(petRequest.getBirthDate());
+        pet.setName(petRequest.name);
+        pet.setBirthDate(petRequest.birthDate);
 
-        petRepository.findPetTypeById(petRequest.getTypeId())
+        petRepository.findPetTypeById(petRequest.typeId)
             .ifPresent(pet::setType);
 
-        log.info("Saving pet {}", pet);
+        log.infof("Saving pet {}", pet);
         return petRepository.save(pet);
     }
 

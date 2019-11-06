@@ -15,14 +15,13 @@
  */
 package org.springframework.samples.petclinic.customers.web;
 
-import io.micrometer.core.annotation.Timed;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.jboss.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.customers.model.Owner;
 import org.springframework.samples.petclinic.customers.model.OwnerRepository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -36,12 +35,13 @@ import java.util.Optional;
  */
 @RequestMapping("/owners")
 @RestController
-@Timed("petclinic.owner")
-@RequiredArgsConstructor
-@Slf4j
-class OwnerResource {
+//@Timed("petclinic.owner")
+public class OwnerResource {
 
-    private final OwnerRepository ownerRepository;
+    private final Logger log = Logger.getLogger(OwnerResource.class);
+
+    @Inject
+    OwnerRepository ownerRepository;
 
     /**
      * Create Owner
@@ -83,7 +83,7 @@ class OwnerResource {
         ownerModel.setCity(ownerRequest.getCity());
         ownerModel.setAddress(ownerRequest.getAddress());
         ownerModel.setTelephone(ownerRequest.getTelephone());
-        log.info("Saving owner {}", ownerModel);
+        log.infof("Saving owner {}", ownerModel);
         ownerRepository.save(ownerModel);
     }
 }

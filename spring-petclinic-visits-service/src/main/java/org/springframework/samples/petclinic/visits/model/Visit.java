@@ -26,9 +26,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 /**
  * Simple JavaBean domain object representing a visit.
@@ -38,16 +35,12 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Table(name = "visits")
-@Builder(builderMethodName = "visit")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Visit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Builder.Default
     @Column(name = "visit_date")
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd")

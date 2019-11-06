@@ -15,8 +15,6 @@
  */
 package org.springframework.samples.petclinic.customers.web;
 
-import lombok.Data;
-
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,19 +24,18 @@ import org.springframework.samples.petclinic.customers.model.PetType;
 /**
  * @author mszarlinski@bravurasolutions.com on 2016-12-05.
  */
-@Data
 class PetDetails {
 
-    private long id;
+    public long id;
 
-    private String name;
+    public String name;
 
-    private String owner;
+    public String owner;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthDate;
+    public Date birthDate;
 
-    private PetType type;
+    public PetType type;
 
     PetDetails(Pet pet) {
         this.id = pet.getId();
