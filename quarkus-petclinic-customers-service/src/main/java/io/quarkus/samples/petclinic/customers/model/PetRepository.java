@@ -33,7 +33,7 @@ import java.util.Optional;
  * @author Michael Isvy
  * @author Maciej Szarlinski
  */
-public interface PetRepository extends JpaRepository<Pet, Integer> {
+public interface PetRepository extends JpaRepository<Pet, Long> {
 
     /**
      * Retrieve all {@link PetType}s from the data store.

@@ -28,4 +28,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Michael Isvy
  * @author Maciej Szarlinski
  */
-public interface OwnerRepository extends JpaRepository<Owner, Integer> { }
+public interface OwnerRepository extends JpaRepository<Owner, Long> { }

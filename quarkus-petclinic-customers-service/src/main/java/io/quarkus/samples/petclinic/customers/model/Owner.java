@@ -53,7 +53,7 @@ public class Owner extends PanacheEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "first_name")
     @NotEmpty
@@ -79,7 +79,7 @@ public class Owner extends PanacheEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "owner")
     private Set<Pet> pets;
 
-    public Integer  getId() {
+    public Long getId() {
         return id;
     }
 

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 //@Data
 class PetRequest {
-    public Integer id;
+    public Long id;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     public  Date birthDate;

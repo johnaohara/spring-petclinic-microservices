@@ -62,7 +62,7 @@ public class PetResource {
     @ResponseStatus(HttpStatus.CREATED)
     public Pet processCreationForm(
         @RequestBody PetRequest petRequest,
-        @PathVariable("ownerId") Integer ownerId) {
+        @PathVariable("ownerId") Long ownerId) {
 
         final Pet pet = new Pet();
         final Optional<Owner> optionalOwner = ownerRepository.findById(ownerId);
@@ -75,7 +75,7 @@ public class PetResource {
     @PutMapping("/owners/*/pets/{petId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void processUpdateForm(@RequestBody PetRequest petRequest) {
-        Integer petId = petRequest.id;
+        Long petId = petRequest.id;
         Pet pet = findPetById(petId);
         save(pet, petRequest);
     }
@@ -93,12 +93,12 @@ public class PetResource {
     }
 
     @GetMapping("owners/*/pets/{petId}")
-    public PetDetails findPet(@PathVariable("petId") Integer petId) {
+    public PetDetails findPet(@PathVariable("petId") Long petId) {
         return new PetDetails(findPetById(petId));
     }
 
 
-    private Pet findPetById(Integer petId) {
+    private Pet findPetById(Long petId) {
         Optional<Pet> pet = petRepository.findById(petId);
         if (!pet.isPresent()) {
             throw new ResourceNotFoundException("Pet "+petId+" not found");

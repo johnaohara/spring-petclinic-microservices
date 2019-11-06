@@ -42,6 +42,7 @@ import java.util.Optional;
  */
 @RequestMapping("/owners")
 @RestController
+//TODO: impl timed methods
 //@Timed("petclinic.owner")
 public class OwnerResource {
 
@@ -63,7 +64,7 @@ public class OwnerResource {
      * Read single Owner
      */
     @GetMapping(value = "/{ownerId}")
-    public Optional<Owner> findOwner(@PathVariable("ownerId") int ownerId) {
+    public Optional<Owner> findOwner(@PathVariable("ownerId") Long ownerId) {
         return ownerRepository.findById(ownerId);
     }
 
@@ -80,7 +81,7 @@ public class OwnerResource {
      */
     @PutMapping(value = "/{ownerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateOwner(@PathVariable("ownerId") int ownerId, @Valid @RequestBody Owner ownerRequest) {
+    public void updateOwner(@PathVariable("ownerId") Long ownerId, @Valid @RequestBody Owner ownerRequest) {
         final Optional<Owner> owner = ownerRepository.findById(ownerId);
 
         final Owner ownerModel = owner.orElseThrow(() -> new ResourceNotFoundException("Owner "+ownerId+" not found"));

@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 class PetDetails {
 
-    public Integer id;
+    public Long id;
 
     public String name;
 
