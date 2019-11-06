@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.quarkus.samples.petclinic.vets</groupId>
-    <artifactId>quarkus-petclinic-vets-service</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <description>Quarkus PetClinic Vets Service</description>
+	<groupId>io.quarkus.samples.petclinic.visits</groupId>
+	<artifactId>quarkus-petclinic-visits-service</artifactId>
+	<packaging>jar</packaging>
+	<description>Quarkus PetClinic Visits Service</description>
 
     <parent>
         <groupId>io.quarkus.samples</groupId>
@@ -15,7 +14,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <dependencies>
+    <properties>
+        <docker.exposed.port>8081</docker.exposed.port>
+        <docker.image.dockerfile.dir>${basedir}/../docker</docker.image.dockerfile.dir>
+    </properties>
+
+	<dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-jackson</artifactId>
@@ -28,7 +32,11 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-metrics</artifactId>
+        </dependency>
 
-    </dependencies>
+	</dependencies>
 
 </project>

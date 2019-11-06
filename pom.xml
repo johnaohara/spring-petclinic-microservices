@@ -5,14 +5,14 @@
 
     <groupId>io.quarkus.samples</groupId>
     <artifactId>quarkus-petclinic-microservices</artifactId>
-    <version>2.1.4</version>
+    <version>1.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <packaging>pom</packaging>
 
 
     <properties>
-        <!--<quarkus.version>0.26.1</quarkus.version>-->
-        <quarkus.version>999-SNAPSHOT</quarkus.version>
+        <quarkus.version>0.28.1</quarkus.version>
+        <!--<quarkus.version>999-SNAPSHOT</quarkus.version>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -21,8 +21,9 @@
         <java.version>1.8</java.version>
         <assertj.version>3.11.1</assertj.version>
 
-        <quarkus-boot.version>2.1.2.RELEASE</quarkus-boot.version>
-        <quarkus-cloud.version>Greenwich.SR1</quarkus-cloud.version>
+        <surefire-plugin.version>2.22.1</surefire-plugin.version>
+        <compiler-plugin.version>3.8.0</compiler-plugin.version>
+        <docker-plugin.version>0.28.0</docker-plugin.version>
 
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
 
@@ -49,9 +50,9 @@
 
     <modules>
         <!--<module>quarkus-petclinic-admin-server</module>-->
-        <!--<module>quarkus-petclinic-customers-service</module>-->
+        <module>quarkus-petclinic-customers-service</module>
         <module>quarkus-petclinic-vets-service</module>
-        <!--<module>quarkus-petclinic-visits-service</module>-->
+        <module>quarkus-petclinic-visits-service</module>
         <!--<module>quarkus-petclinic-config-server</module>-->
         <!--<module>quarkus-petclinic-discovery-server</module>-->
         <!--<module>quarkus-petclinic-api-gateway</module>-->
@@ -59,97 +60,195 @@
     </modules>
 
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.quarkus.cloud</groupId>
-                <artifactId>quarkus-cloud-dependencies</artifactId>
-                <version>${quarkus-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.quarkus.boot</groupId>
-                <artifactId>quarkus-boot-starter-test</artifactId>
-                <version>${quarkus-boot.version}</version>
-                <scope>test</scope>
-                <exclusions>
-                    <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <!-- the parameters=true option is critical so that RESTEasy works fine -->
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- you need this specific version to integrate with the other build helpers -->
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+                <configuration>
+                    <systemProperties>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- This is what injects the magic Quarkus bytecode -->
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>${quarkus.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Automatically start PostgreSQL for integration testing - requires Docker -->
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker-plugin.version}</version>
+                <configuration>
+                    <skip>${skipTests}</skip>
+                    <images>
+                        <image>
+                            <name>postgres:10.5</name>
+                            <alias>postgresql</alias>
+                            <run>
+                                <env>
+                                    <POSTGRES_USER>quarkus_test</POSTGRES_USER>
+                                    <POSTGRES_PASSWORD>quarkus_test</POSTGRES_PASSWORD>
+                                    <POSTGRES_DB>quarkus_test</POSTGRES_DB>
+                                </env>
+                                <ports>
+                                    <port>5432:5432</port>
+                                </ports>
+                                <log>
+                                    <prefix>PostgreSQL:</prefix>
+                                    <date>default</date>
+                                    <color>cyan</color>
+                                </log>
+                                <wait>
+                                    <tcp>
+                                        <mode>mapped</mode>
+                                        <ports>
+                                            <port>5432</port>
+                                        </ports>
+                                    </tcp>
+                                    <time>10000</time>
+                                </wait>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>docker-start</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>stop</goal>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>docker-stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <profiles>
         <profile>
-            <id>quarkusboot</id>
+            <!-- Optionally activate this profile to compile the demo into native! -->
+            <id>native</id>
             <activation>
-                <file>
-                    <!-- Just a way to identify a Quarkus Boot application -->
-                    <exists>src/main/resources/bootstrap.yml</exists>
-                </file>
+                <property>
+                    <name>native</name>
+                </property>
             </activation>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>io.quarkus.boot</groupId>
-                        <artifactId>quarkus-boot-maven-plugin</artifactId>
-                        <configuration>
-                            <fork>true</fork>
-                        </configuration>
+                        <groupId>io.quarkus</groupId>
+                        <artifactId>quarkus-maven-plugin</artifactId>
+                        <version>${quarkus.version}</version>
                         <executions>
                             <execution>
-                                <!-- Quarkus Boot Actuator displays build-related information if a META-INF/build-info.properties file is present -->
                                 <goals>
-                                    <goal>build-info</goal>
+                                    <goal>native-image</goal>
                                 </goals>
                                 <configuration>
-                                    <additionalProperties>
-                                        <encoding.source>${project.build.sourceEncoding}</encoding.source>
-                                        <encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
-                                        <java.source>${maven.compiler.source}</java.source>
-                                        <java.target>${maven.compiler.target}</java.target>
-                                    </additionalProperties>
+                                    <enableHttpUrlHandler>true</enableHttpUrlHandler>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
-
-                    <!-- Quarkus Boot Actuator displays build-related information if a META-INF/build-info.properties file is present -->
                     <plugin>
-                        <groupId>pl.project13.maven</groupId>
-                        <artifactId>git-commit-id-plugin</artifactId>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${surefire-plugin.version}</version>
                         <executions>
                             <execution>
                                 <goals>
-                                    <goal>revision</goal>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
                                 </goals>
+                                <configuration>
+                                    <systemProperties>
+                                        <native.image.path>
+                                            ${project.build.directory}/${project.build.finalName}-runner
+                                        </native.image.path>
+                                    </systemProperties>
+                                </configuration>
                             </execution>
                         </executions>
-                        <configuration>
-                            <verbose>true</verbose>
-                            <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
-                            <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                            <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
-                            </generateGitPropertiesFilename>
-                            <failOnNoGitDirectory>false</failOnNoGitDirectory>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
-
         </profile>
-
+        <profile>
+            <id>eclipse</id>
+            <activation>
+                <property>
+                    <!-- This is a trick to have the profile automatically activated by Eclipse -->
+                    <name>m2e.version</name>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                        <plugin>
+                            <groupId>org.eclipse.m2e</groupId>
+                            <artifactId>lifecycle-mapping</artifactId>
+                            <version>1.0.0</version>
+                            <configuration>
+                                <lifecycleMappingMetadata>
+                                    <pluginExecutions>
+                                        <pluginExecution>
+                                            <pluginExecutionFilter>
+                                                <groupId>io.fabric8</groupId>
+                                                <artifactId>
+                                                    docker-maven-plugin
+                                                </artifactId>
+                                                <versionRange>
+                                                    [0.28.0,)
+                                                </versionRange>
+                                                <goals>
+                                                    <goal>start</goal>
+                                                    <goal>stop</goal>
+                                                </goals>
+                                            </pluginExecutionFilter>
+                                            <action>
+                                                <ignore></ignore>
+                                            </action>
+                                        </pluginExecution>
+                                    </pluginExecutions>
+                                </lifecycleMappingMetadata>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
         <profile>
             <id>buildDocker</id>
             <build>
@@ -191,13 +290,5 @@
             </build>
         </profile>
     </profiles>
-
-    <repositories>
-        <repository>
-            <id>repository.quarkus.milestone</id>
-            <name>Quarkus Milestone Repository</name>
-            <url>http://repo.quarkus.io/milestone</url>
-        </repository>
-    </repositories>
 
 </project>

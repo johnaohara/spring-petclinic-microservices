@@ -1,9 +1,0 @@
-quarkus.jpa.hibernate.ddl-auto: none
-
-quarkus:
-  datasource:
-    schema: classpath*:db/hsqldb/schema.sql
-    data: classpath*:db/hsqldb/data.sql
-
-logging.level.io.quarkus: INFO
-
