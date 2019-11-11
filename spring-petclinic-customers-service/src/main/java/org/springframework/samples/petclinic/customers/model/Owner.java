@@ -15,11 +15,7 @@
  */
 package org.springframework.samples.petclinic.customers.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.springframework.core.style.ToStringCreator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,10 +28,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
-
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-import org.springframework.core.style.ToStringCreator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Simple JavaBean domain object representing an owner.
@@ -131,7 +128,8 @@ public class Owner {
 
     public List<Pet> getPets() {
         final List<Pet> sortedPets = new ArrayList<>(getPetsInternal());
-        PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
+//        TODO: impl sorter,PropertyComparator pulls in 'org.apache.commons.logging.Log'
+//        PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
         return Collections.unmodifiableList(sortedPets);
     }
 

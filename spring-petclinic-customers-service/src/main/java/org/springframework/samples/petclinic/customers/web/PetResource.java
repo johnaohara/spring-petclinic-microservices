@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,13 +67,16 @@ public class PetResource {
 
         final Pet pet = new Pet();
         final Optional<Owner> optionalOwner = ownerRepository.findById(ownerId);
-        Owner owner = optionalOwner.orElseThrow(() -> new ResourceNotFoundException("Owner "+ownerId+" not found"));
+        Owner owner = optionalOwner.orElseThrow(() -> new ResourceNotFoundException("Owner " + ownerId + " not found"));
         owner.addPet(pet);
 
         return save(pet, petRequest);
     }
 
-    @PutMapping("/owners/*/pets/{petId}")
+
+    //TODO: revert to spring-web ResourceMapping syntax, see https://github.com/quarkusio/quarkus/issues/5370
+
+    @PutMapping("/owners/{ownerID:.*}/pets/{petId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void processUpdateForm(@RequestBody PetRequest petRequest) {
         int petId = petRequest.id;
@@ -92,7 +96,9 @@ public class PetResource {
         return petRepository.save(pet);
     }
 
-    @GetMapping("owners/*/pets/{petId}")
+    //TODO: revert to spring-web ResourceMapping syntax, see https://github.com/quarkusio/quarkus/issues/5370
+
+    @GetMapping("owners/{ownerID:.*}/pets/{petId}")
     public PetDetails findPet(@PathVariable("petId") int petId) {
         return new PetDetails(findPetById(petId));
     }
@@ -101,9 +107,52 @@ public class PetResource {
     private Pet findPetById(int petId) {
         Optional<Pet> pet = petRepository.findById(petId);
         if (!pet.isPresent()) {
-            throw new ResourceNotFoundException("Pet "+petId+" not found");
+            throw new ResourceNotFoundException("Pet " + petId + " not found");
         }
         return pet.get();
     }
 
+
+    //TODO: revert Owner endpoints to OwnerResource, see: https://github.com/quarkusio/quarkus/issues/5375
+
+    @PostMapping(value = "/owners")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Owner createOwner(@Valid @RequestBody Owner owner) {
+        return ownerRepository.save(owner);
+    }
+
+    /**
+     * Read single Owner
+     */
+    @GetMapping(value = "/owners/{ownerId}")
+    public Optional<Owner> findOwner(@PathVariable("ownerId") int ownerId) {
+        return ownerRepository.findById(ownerId);
+    }
+
+    /**
+     * Read List of Owners
+     */
+    @GetMapping(value = "/owners")
+    public List<Owner> findAll() {
+        return ownerRepository.findAll();
+    }
+
+    /**
+     * Update Owner
+     */
+    @PutMapping(value = "/owners/{ownerId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateOwner(@PathVariable("ownerId") int ownerId, @Valid @RequestBody Owner ownerRequest) {
+        final Optional<Owner> owner = ownerRepository.findById(ownerId);
+
+        final Owner ownerModel = owner.orElseThrow(() -> new ResourceNotFoundException("Owner " + ownerId + " not found"));
+        // This is done by hand for simplicity purpose. In a real life use-case we should consider using MapStruct.
+        ownerModel.setFirstName(ownerRequest.getFirstName());
+        ownerModel.setLastName(ownerRequest.getLastName());
+        ownerModel.setCity(ownerRequest.getCity());
+        ownerModel.setAddress(ownerRequest.getAddress());
+        ownerModel.setTelephone(ownerRequest.getTelephone());
+        log.infof("Saving owner {}", ownerModel);
+        ownerRepository.save(ownerModel);
+    }
 }

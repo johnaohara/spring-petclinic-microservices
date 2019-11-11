@@ -19,6 +19,7 @@ import org.jboss.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.customers.model.Owner;
 import org.springframework.samples.petclinic.customers.model.OwnerRepository;
+import org.springframework.samples.petclinic.customers.model.Pet;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -33,57 +34,59 @@ import java.util.Optional;
  * @author Michael Isvy
  * @author Maciej Szarlinski
  */
-@RequestMapping("/owners")
-@RestController
+//@RequestMapping("/owners")
+//@RestController
 //@Timed("petclinic.owner")
 public class OwnerResource {
 
-    private final Logger log = Logger.getLogger(OwnerResource.class);
+//TODO: revert control to this Resource, see: https://github.com/quarkusio/quarkus/issues/5375
 
-    @Inject
-    OwnerRepository ownerRepository;
-
-    /**
-     * Create Owner
-     */
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Owner createOwner(@Valid @RequestBody Owner owner) {
-        return ownerRepository.save(owner);
-    }
-
-    /**
-     * Read single Owner
-     */
-    @GetMapping(value = "/{ownerId}")
-    public Optional<Owner> findOwner(@PathVariable("ownerId") int ownerId) {
-        return ownerRepository.findById(ownerId);
-    }
-
-    /**
-     * Read List of Owners
-     */
-    @GetMapping
-    public List<Owner> findAll() {
-        return ownerRepository.findAll();
-    }
-
-    /**
-     * Update Owner
-     */
-    @PutMapping(value = "/{ownerId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateOwner(@PathVariable("ownerId") int ownerId, @Valid @RequestBody Owner ownerRequest) {
-        final Optional<Owner> owner = ownerRepository.findById(ownerId);
-
-        final Owner ownerModel = owner.orElseThrow(() -> new ResourceNotFoundException("Owner "+ownerId+" not found"));
-        // This is done by hand for simplicity purpose. In a real life use-case we should consider using MapStruct.
-        ownerModel.setFirstName(ownerRequest.getFirstName());
-        ownerModel.setLastName(ownerRequest.getLastName());
-        ownerModel.setCity(ownerRequest.getCity());
-        ownerModel.setAddress(ownerRequest.getAddress());
-        ownerModel.setTelephone(ownerRequest.getTelephone());
-        log.infof("Saving owner {}", ownerModel);
-        ownerRepository.save(ownerModel);
-    }
+//    private final Logger log = Logger.getLogger(OwnerResource.class);
+//
+//    @Inject
+//    OwnerRepository ownerRepository;
+//
+//    /**
+//     * Create Owner
+//     */
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Owner createOwner(@Valid @RequestBody Owner owner) {
+//        return ownerRepository.save(owner);
+//    }
+//
+//    /**
+//     * Read single Owner
+//     */
+//    @GetMapping(value = "/{ownerId}")
+//    public Optional<Owner> findOwner(@PathVariable("ownerId") int ownerId) {
+//        return ownerRepository.findById(ownerId);
+//    }
+//
+//    /**
+//     * Read List of Owners
+//     */
+//    @GetMapping
+//    public List<Owner> findAll() {
+//        return ownerRepository.findAll();
+//    }
+//
+//    /**
+//     * Update Owner
+//     */
+//    @PutMapping(value = "/{ownerId}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void updateOwner(@PathVariable("ownerId") int ownerId, @Valid @RequestBody Owner ownerRequest) {
+//        final Optional<Owner> owner = ownerRepository.findById(ownerId);
+//
+//        final Owner ownerModel = owner.orElseThrow(() -> new ResourceNotFoundException("Owner "+ownerId+" not found"));
+//        // This is done by hand for simplicity purpose. In a real life use-case we should consider using MapStruct.
+//        ownerModel.setFirstName(ownerRequest.getFirstName());
+//        ownerModel.setLastName(ownerRequest.getLastName());
+//        ownerModel.setCity(ownerRequest.getCity());
+//        ownerModel.setAddress(ownerRequest.getAddress());
+//        ownerModel.setTelephone(ownerRequest.getTelephone());
+//        log.infof("Saving owner {}", ownerModel);
+//        ownerRepository.save(ownerModel);
+//    }
 }
